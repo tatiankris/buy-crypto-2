@@ -1,0 +1,11 @@
+.currency {
+  text-align: start;
+  padding: 40px 0;
+  min-height: calc(100vh - 80px);
+  .paper {
+    background-color: white;
+    border-radius: 12px;
+    padding: 8px;
+
+  }
+}

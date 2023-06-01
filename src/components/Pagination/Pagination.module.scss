@@ -1,0 +1,26 @@
+.pagination {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 4px;
+
+  button {
+    border: 1px solid #c2bdbd;
+    height: 34px;
+    min-width: 28px;
+    color: #615e5e;
+    cursor: pointer;
+    &:hover {
+      background-color: rgb(253, 249, 248);
+    }
+    &:active {
+      background-color: rgba(241, 207, 166, 0.65);
+    }
+  }
+  .current {
+    background-color: rgba(241, 207, 166, 0.77);
+
+  }
+
+}
