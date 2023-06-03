@@ -10,24 +10,13 @@
   justify-content: center;
   align-items: center;
   .paper {
-    color: #faf7f5;
+    color: #5c5550;
     padding: 8px;
     min-height: 200px;
     min-width: 400px;
-    background-color: #5a5555;
+    background-color: #f1e7e7;
     position: relative;
 
-
-    .close {
-      font-weight: bold;
-      color: white;
-      position: absolute;
-      top: 6px;
-      right: 6px;
-      cursor: pointer;
-      border: none;
-      background-color: rgba(255, 255, 255, 0);
-    }
     form {
       display: flex;
       flex-direction: row;

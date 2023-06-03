@@ -1,0 +1,21 @@
+.portfolio {
+  text-align: center;
+  font-size: 24px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  .portfolioButton {
+    display: block;
+    border: none;
+    border-radius: 12px;
+    height: 48px;
+    width: 48px;
+    cursor: pointer;
+    background-color: rgba(222, 186, 144, 0.27);
+    &:hover {
+      background-color: rgba(222, 186, 144, 0.14);
+    }
+  }
+}

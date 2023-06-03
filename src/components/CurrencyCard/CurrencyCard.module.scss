@@ -1,0 +1,15 @@
+.row {
+  height: 60px;
+  color: #575757;
+  cursor: pointer;
+  &:hover {
+    background-color: rgba(203, 158, 107, 0.06);
+  }
+  &:active {
+    background-color: rgba(203, 158, 107, 0.02);
+  }
+  .column {
+    border-bottom: 2px solid rgba(250, 170, 89, 0.26);
+  }
+
+}

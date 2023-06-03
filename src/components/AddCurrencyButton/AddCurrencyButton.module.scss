@@ -1,0 +1,15 @@
+.addButton {
+  align-items: center;
+  padding: 4px;
+  border: none;
+  cursor: pointer;
+  width: 28px;
+  border-radius: 8px;
+  font-weight: bold;
+  &:hover {
+    background-color: rgba(128, 128, 128, 0.3);
+  }
+  &:active {
+    background-color: #efefef;
+  }
+}
