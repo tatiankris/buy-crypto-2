@@ -7,6 +7,7 @@
   margin-top: 20px;
 
   button {
+    position: relative;
     border: 1px solid #c2bdbd;
     height: 34px;
     min-width: 28px;
@@ -18,10 +19,31 @@
     &:active {
       background-color: rgba(241, 207, 166, 0.65);
     }
+    &:disabled {
+      cursor: auto;
+      &:hover {
+        background-color: #f0f0f0;
+      }
+      &:active {
+        background-color: #f0f0f0;
+      }
+      &::after {
+        content: ' ';
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        background-color: rgba(94, 87, 87, 0.51);
+        z-index: 30;
+      }
+    }
   }
-  .current {
-    background-color: rgba(241, 207, 166, 0.77);
-
+  .active {
+    background-color: rgba(248, 152, 33, 0.77);
+    &:hover {
+      background-color: rgba(245, 151, 35, 0.57);
+    }
   }
 
 }

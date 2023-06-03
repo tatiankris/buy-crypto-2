@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import style from './CurrencyCard.module.scss';
 import { useNavigate } from 'react-router-dom';
 import AddCurrencyButton from '../AddCurrencyButton/AddCurrencyButton';

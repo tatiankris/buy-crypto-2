@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import style from './PortfolioModal.module.scss';
 import Pagination from '../../components/Pagination/Pagination';
 import CurrenciesTable from '../../components/CurrenciesTable/CurrenciesTable';
@@ -9,6 +9,7 @@ type PropsType = {
 };
 
 function PortfolioModal({ handleClose, ...props }: PropsType) {
+  const [page, setPage] = useState(0);
   return (
     <div className={style.modal} onClick={handleClose}>
       <div
@@ -19,8 +20,8 @@ function PortfolioModal({ handleClose, ...props }: PropsType) {
       >
         <CLoseButton handleClose={handleClose} />
         <h2>Crypto Portfolio</h2>
-        <CurrenciesTable type={'portfolio'} />
-        <Pagination />
+        <CurrenciesTable page={page} type={'portfolio'} />
+        <Pagination page={page} setPage={setPage} />
       </div>
     </div>
   );

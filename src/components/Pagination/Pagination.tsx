@@ -1,14 +1,93 @@
 import React from 'react';
 import style from './Pagination.module.scss';
-
-function Pagination() {
+type PropsType = { page: number; setPage: (num: number) => void };
+function Pagination({ setPage, ...props }: PropsType) {
+  const page = props.page;
+  const pages = Array.from({ length: 2000 / 6 }, (_, index) => index + 1);
+  console.log(pages);
+  const firstPages = pages.slice(0, 4);
+  const currentPages = pages.slice(page - 1, page + 2);
+  const lastPages = pages.slice(-3);
+  const handleSetPage = (page: number) => {
+    setPage(page);
+  };
   return (
     <div className={style.pagination}>
-      <button>⬅</button>
-      <button className={style.current}>1</button>
-      <button>2</button>
-      <button>3</button>
-      <button>➡</button>
+      <button
+        disabled={page < 1}
+        onClick={() => {
+          page > 0 && handleSetPage(page - 1);
+        }}
+      >
+        ⬅
+      </button>
+      {page < 3 &&
+        firstPages.map((p) => (
+          <button
+            onClick={() => {
+              handleSetPage(p - 1);
+            }}
+            className={p === page + 1 ? style.active : ''}
+            key={p}
+          >
+            {p}
+          </button>
+        ))}
+      {page > 2 && (
+        <button
+          onClick={() => {
+            handleSetPage(0);
+          }}
+          className={1 === page + 1 ? style.active : ''}
+        >
+          1
+        </button>
+      )}
+      ...
+      {page > 2 &&
+        page < pages.length - 3 &&
+        currentPages.map((p) => (
+          <button
+            onClick={() => {
+              handleSetPage(p - 1);
+            }}
+            className={p === page + 1 ? style.active : ''}
+            key={p}
+          >
+            {p}
+          </button>
+        ))}
+      ...
+      {page < pages.length - 3 && (
+        <button
+          onClick={() => {
+            handleSetPage(pages.length - 1);
+          }}
+          className={pages.length === page + 1 ? style.active : ''}
+        >
+          {pages.length}
+        </button>
+      )}
+      {page > pages.length - 4 &&
+        lastPages.map((p) => (
+          <button
+            onClick={() => {
+              handleSetPage(p - 1);
+            }}
+            className={p === page + 1 ? style.active : ''}
+            key={p}
+          >
+            {p}
+          </button>
+        ))}
+      <button
+        disabled={page + 1 === pages.length}
+        onClick={() => {
+          page < pages.length && handleSetPage(page + 1);
+        }}
+      >
+        ➡
+      </button>
     </div>
   );
 }
