@@ -16,6 +16,12 @@
       th {
         font-weight: 400;
         border-bottom: 3px solid rgba(203, 130, 57, 0.19);
+        &:first-child {
+          padding-left: 3%;
+        }
+        &:nth-child(-n+2) {
+          text-align: left;
+        }
       }
     }
   }

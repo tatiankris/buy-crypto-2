@@ -3,12 +3,15 @@ import style from './AddCurrencyButton.module.scss';
 import AddCurrencyModal from '../../pages/AddCurrencyModal/AddCurrencyModal';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-function AddCurrencyButton() {
+type PropsType = {
+  id: string;
+};
+function AddCurrencyButton({ id, ...props }: PropsType) {
   const navigate = useNavigate();
   const location = useLocation();
   const handleOpenModal = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.stopPropagation();
-    navigate('add', { state: { background: location } });
+    navigate(`add/${id}`, { state: { background: location } });
   };
   return (
     <div>

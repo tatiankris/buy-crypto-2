@@ -6,21 +6,29 @@ export const instance = axios.create({
 });
 
 export const coinsAPI = {
-  async getAssets(page: number) {
-    const res = await instance.get<AxiosResponseAssetsType>('assets', {
-      params: { limit: '6', offset: String(page) },
+  async getAssets(page: number, limit: number) {
+    const res = await instance.get<AxiosResponseType<ResponseAssetsType>>('assets', {
+      params: { limit: String(limit), offset: String(page) },
+    });
+    return res.data;
+  },
+  async getAssetsWithIds(ids: string) {
+    const res = await instance.get<AxiosResponseType<ResponseAssetsType>>('assets', {
+      params: { ids: ids },
     });
     return res.data;
   },
   getAssetsItem(id: string) {
-    return instance.get(`assets/${id}`);
+    return instance.get<AxiosResponseType<ResponseItemType>>(`assets/${id}`);
   },
   getAssetsItemHistory(id: string) {
     return instance.get(`assets/${id}/history`, { params: { interval: 'd1' } });
   },
 };
 
-type ResponseAssetsType = Array<{
+export type ResponseAssetsType = Array<ResponseItemType>;
+
+export type ResponseItemType = {
   id: string;
   rank: string;
   symbol: string;
@@ -32,6 +40,6 @@ type ResponseAssetsType = Array<{
   priceUsd: string;
   changePercent24Hr: string;
   vwap24Hr: string;
-}>;
+};
 
-type AxiosResponseAssetsType = { data: ResponseAssetsType };
+export type AxiosResponseType<T> = { data: T };

@@ -5,25 +5,28 @@ import AddCurrencyButton from '../AddCurrencyButton/AddCurrencyButton';
 import DeleteCurrencyButton from '../../shared/DeleteCurrencyButton/DeleteCurrencyButton';
 
 type PropsType = {
-  currency: { name: string; priceUsd: string; changePercent24Hr: string };
+  currency: { name: string; priceUsd: string; changePercent24Hr: string; id: string };
   type: 'portfolio' | 'main';
+  userCurrencies?: Array<{ id: string; value: number }>;
 };
-function CurrencyCard({ type, currency, ...props }: PropsType) {
+function CurrencyCard({ type, currency, userCurrencies, ...props }: PropsType) {
   const navigate = useNavigate();
-
+  const c = currency;
+  const userCurrency = userCurrencies && userCurrencies.find((v) => v.id === c.id);
+  const userValue = userCurrency && String(userCurrency.value);
   const handleCurrencyPage = () => {
-    navigate('bitcoin');
+    navigate(`${c.id}`);
   };
 
-  const c = currency;
   return (
     <tr onClick={handleCurrencyPage} className={style.row}>
       <td className={style.column}>{c.name}</td>
+      {type === 'portfolio' && <td className={style.column}>{userValue?.slice(0, 9)}</td>}
+      <td className={style.column}>{c.priceUsd.slice(0, 9)}</td>
       {type === 'main' && <td className={style.column}>{c.changePercent24Hr}</td>}
-      <td className={style.column}>{c.priceUsd}</td>
       {type === 'main' && (
         <td className={style.column}>
-          <AddCurrencyButton />
+          <AddCurrencyButton id={c.id} />
         </td>
       )}
       {type === 'portfolio' && (

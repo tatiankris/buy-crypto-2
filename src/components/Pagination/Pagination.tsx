@@ -1,10 +1,9 @@
 import React from 'react';
 import style from './Pagination.module.scss';
-type PropsType = { page: number; setPage: (num: number) => void };
-function Pagination({ setPage, ...props }: PropsType) {
+type PropsType = { page: number; setPage: (num: number) => void; itemsCount: number };
+function Pagination({ setPage, itemsCount, ...props }: PropsType) {
   const page = props.page;
-  const pages = Array.from({ length: 2000 / 6 }, (_, index) => index + 1);
-  console.log(pages);
+  const pages = Array.from({ length: Math.ceil(itemsCount / 6) }, (_, index) => index + 1);
   const firstPages = pages.slice(0, 4);
   const currentPages = pages.slice(page - 1, page + 2);
   const lastPages = pages.slice(-3);
@@ -43,7 +42,7 @@ function Pagination({ setPage, ...props }: PropsType) {
           1
         </button>
       )}
-      ...
+      {pages.length > 3 && <span>...</span>}
       {page > 2 &&
         page < pages.length - 3 &&
         currentPages.map((p) => (
@@ -57,7 +56,7 @@ function Pagination({ setPage, ...props }: PropsType) {
             {p}
           </button>
         ))}
-      ...
+      {pages.length > 3 && <span>...</span>}
       {page < pages.length - 3 && (
         <button
           onClick={() => {
@@ -69,6 +68,7 @@ function Pagination({ setPage, ...props }: PropsType) {
         </button>
       )}
       {page > pages.length - 4 &&
+        pages.length > 3 &&
         lastPages.map((p) => (
           <button
             onClick={() => {

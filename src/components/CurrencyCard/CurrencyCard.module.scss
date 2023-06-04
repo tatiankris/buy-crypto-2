@@ -2,6 +2,8 @@
   height: 60px;
   color: #575757;
   cursor: pointer;
+
+
   &:hover {
     background-color: rgba(203, 158, 107, 0.06);
   }
@@ -10,6 +12,18 @@
   }
   .column {
     border-bottom: 2px solid rgba(250, 170, 89, 0.26);
+    &:first-child {
+      padding-left: 3%;
+    }
+    &:nth-child(-n+2) {
+      text-align: left;
+    }
+    &:nth-child(n+3) {
+      text-align: center;
+    }
+    &:last-child {
+      padding-right: 8px;
+    }
   }
 
 }

@@ -22,13 +22,29 @@ function Routing() {
         <Route path="/" element={<Navigate to={'currencies'} />} />
         <Route path="currencies" element={<MainPage />} />
         <Route path={'currencies/:id'} element={<CurrencyPage />} />
+        {!background && (
+          <>
+            <Route path={`portfolio`} element={<PortfolioModal handleClose={handleClose} />} />
+            <Route
+              path={`currencies/add/:currencyId`}
+              element={<AddCurrencyModal handleClose={handleClose} />}
+            />
+            <Route
+              path={`currencies/:id/add/:currencyId`}
+              element={<AddCurrencyModal handleClose={handleClose} />}
+            />
+          </>
+        )}
       </Routes>
       {background && (
         <Routes>
           <Route path={`portfolio`} element={<PortfolioModal handleClose={handleClose} />} />
-          <Route path={`currencies/add`} element={<AddCurrencyModal handleClose={handleClose} />} />
           <Route
-            path={`currencies/:id/add`}
+            path={`currencies/add/:currencyId`}
+            element={<AddCurrencyModal handleClose={handleClose} />}
+          />
+          <Route
+            path={`currencies/:id/add/:currencyId`}
             element={<AddCurrencyModal handleClose={handleClose} />}
           />
         </Routes>
