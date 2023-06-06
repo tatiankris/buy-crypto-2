@@ -1,28 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import style from './AddCurrencyModal.module.scss';
 import CLoseButton from '../../shared/CloseButton/CLoseButton';
-import { useNavigate, useParams } from 'react-router-dom';
-import { useQuery } from 'react-query';
-import { coinsAPI } from '../../processes/api';
+import { useParams } from 'react-router-dom';
+import { useGetCurrency } from '../../processes/query/useGetCurrency';
+import { addInPortfolio } from '../../processes/updatePortfolio';
+import { useGetCurrenciesByIds } from '../../processes/query/useGetCurrenciesByIds';
 
 type PropsType = {
   handleClose: () => void;
 };
 
 function AddCurrencyModal({ handleClose, ...props }: PropsType) {
-  // useEffect(() => {
-  //   localStorage.removeItem('currenciesIds');
-  // }, []);
   const { currencyId } = useParams();
 
-  const { data } = useQuery(['currency', currencyId], async () => {
-    return await coinsAPI.getAssetsItem(currencyId ? currencyId : '');
-  });
-  const currency = data?.data.data;
+  const { data } = useGetCurrency(currencyId ? currencyId : null);
+  const currency = useMemo(() => data?.data.data, [data?.data.data]);
+
   const [cryptoValue, setCryptoValue] = useState<number>(0);
   const [usdValue, setUsdValue] = useState<number>(0);
 
-  console.log('currency', currency);
+  const { refetch } = useGetCurrenciesByIds();
 
   if (!currency) {
     return <div>Not found</div>;
@@ -38,23 +35,11 @@ function AddCurrencyModal({ handleClose, ...props }: PropsType) {
   };
   const addCurrencyHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const localStorageData = localStorage.getItem('currenciesIds');
-    const oldStorageData = localStorageData ? JSON.parse(localStorageData) : null;
-    const oldCurrencyData =
-      oldStorageData &&
-      oldStorageData.find((c: { id: string; value: number }) => c.id === currency.id);
-    const getNewStorageData = () => {
-      if (oldStorageData) {
-        return oldCurrencyData
-          ? oldStorageData.map((c: { id: string; value: number }) =>
-              c.id === oldCurrencyData.id ? { ...c, value: c.value + cryptoValue } : c
-            )
-          : [...oldStorageData, { id: currency.id, value: cryptoValue }];
-      } else {
-        return [{ id: currency.id, value: cryptoValue }];
-      }
-    };
-    localStorage.setItem('currenciesIds', JSON.stringify(getNewStorageData()));
+    const newPortfolioData = addInPortfolio(currency.id, cryptoValue);
+    localStorage.setItem('usersCurrencies', JSON.stringify(newPortfolioData));
+
+    refetch();
+
     handleClose();
   };
 

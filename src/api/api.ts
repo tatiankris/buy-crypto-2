@@ -1,9 +1,4 @@
-import axios from 'axios';
-
-export const instance = axios.create({
-  baseURL: 'https://api.coincap.io/v2/',
-  // headers: { }
-});
+import { instance } from './instance';
 
 export const coinsAPI = {
   async getAssets(page: number, limit: number) {

@@ -12,6 +12,13 @@
     font-size: 36px;
     font-weight: bolder;
   }
-
-
+  .portfolio {
+    text-align: center;
+    font-size: 18px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+  }
 }

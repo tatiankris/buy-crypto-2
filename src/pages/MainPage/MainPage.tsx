@@ -1,17 +1,14 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import style from './MainPage.module.scss';
 import Pagination from '../../components/Pagination/Pagination';
 import CurrenciesTable from '../../components/CurrenciesTable/CurrenciesTable';
 import { withContainerProvider } from '../../app/providers/with-providers';
-import { useQuery } from 'react-query';
-import { coinsAPI } from '../../processes/api';
+import { useGetAllCurrencies } from '../../processes/query/useGetAllCurrencies';
 
 function MainPage() {
   const [page, setPage] = useState(0);
-  const { data } = useQuery(['currencies', page], async () => {
-    return await coinsAPI.getAssets(page, 6);
-  });
-  const currencies = data && data.data;
+  const { data } = useGetAllCurrencies(page);
+  const currencies = useMemo(() => data?.data, [data?.data]);
 
   return (
     <div className={style.main}>

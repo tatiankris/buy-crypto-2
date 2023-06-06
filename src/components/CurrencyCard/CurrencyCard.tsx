@@ -31,7 +31,7 @@ function CurrencyCard({ type, currency, userCurrencies, ...props }: PropsType) {
       )}
       {type === 'portfolio' && (
         <td className={style.column}>
-          <DeleteCurrencyButton />
+          <DeleteCurrencyButton id={c.id} />
         </td>
       )}
     </tr>

@@ -1,7 +1,7 @@
 import style from './CurrenciesTable.module.scss';
 import React from 'react';
 import CurrencyCard from '../CurrencyCard/CurrencyCard';
-import { ResponseAssetsType } from '../../processes/api';
+import { ResponseAssetsType } from '../../api/api';
 
 type PropsType = {
   userCurrencies?: Array<{ id: string; value: number }>;

@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import style from './PortfolioModal.module.scss';
 import Pagination from '../../components/Pagination/Pagination';
 import CurrenciesTable from '../../components/CurrenciesTable/CurrenciesTable';
 import CLoseButton from '../../shared/CloseButton/CLoseButton';
-import { coinsAPI } from '../../processes/api';
-import { useQuery } from 'react-query';
-import { getUsersCurrencies, getUsersCurrenciesIds } from '../../processes/getLocalStorageData';
+import { getUsersCurrencies } from '../../processes/getLocalStorageData';
+import { useGetCurrenciesByIds } from '../../processes/query/useGetCurrenciesByIds';
 
 type PropsType = {
   handleClose: () => void;
@@ -13,14 +12,9 @@ type PropsType = {
 
 function PortfolioModal({ handleClose, ...props }: PropsType) {
   const [page, setPage] = useState(0);
-  const { data } = useQuery(['walletCurrencies', getUsersCurrenciesIds()], async () => {
-    if (!getUsersCurrenciesIds().length) {
-      return;
-    }
-    return await coinsAPI.getAssetsWithIds(getUsersCurrenciesIds().join());
-  });
 
-  const currencies = data?.data;
+  const { data } = useGetCurrenciesByIds();
+  const currencies = useMemo(() => data?.data, [data?.data]);
 
   console.log('currencies', currencies);
   return (

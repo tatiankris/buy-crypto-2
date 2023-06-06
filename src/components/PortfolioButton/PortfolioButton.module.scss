@@ -1,11 +1,4 @@
-.portfolio {
-  text-align: center;
-  font-size: 24px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 6px;
+
   .portfolioButton {
     display: block;
     border: none;
@@ -18,4 +11,3 @@
       background-color: rgba(222, 186, 144, 0.14);
     }
   }
-}

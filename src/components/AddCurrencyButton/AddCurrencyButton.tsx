@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import style from './AddCurrencyButton.module.scss';
-import AddCurrencyModal from '../../pages/AddCurrencyModal/AddCurrencyModal';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 type PropsType = {

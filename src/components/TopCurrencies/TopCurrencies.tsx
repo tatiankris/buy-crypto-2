@@ -1,17 +1,10 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import style from './TopCurrencies.module.scss';
-import { useQuery } from 'react-query';
-import { coinsAPI } from '../../processes/api';
+import { useGetAllCurrencies } from '../../processes/query/useGetAllCurrencies';
 
 function TopCurrencies() {
-  const { data } = useQuery(
-    'currencies',
-    async () => {
-      return await coinsAPI.getAssets(0, 6);
-    },
-    { refetchOnWindowFocus: false }
-  );
-  const currencies = data && data.data;
+  const { data } = useGetAllCurrencies(0);
+  const currencies = useMemo(() => data?.data, [data?.data]);
   if (!currencies) {
     return <div>Loading</div>;
   }
