@@ -1,9 +1,9 @@
-import React, { useContext, useState } from 'react';
-import { PortfolioContext } from '../../app/App';
+import React, { useContext } from 'react';
+import { UserCurrenciesContext } from '../../app/App';
 import { useGetPortfolioValue } from '../../processes/hooks/useCalcPortfolioValue';
 
 function PortfolioValue() {
-  const { userCurrencies } = useContext(PortfolioContext);
+  const { userCurrencies } = useContext(UserCurrenciesContext);
 
   const { newValue, walletDifference, walletPercentDifference } = useGetPortfolioValue(
     userCurrencies ? userCurrencies : null
