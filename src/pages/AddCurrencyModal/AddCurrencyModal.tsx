@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import style from './AddCurrencyModal.module.scss';
 import CLoseButton from '../../shared/CloseButton/CLoseButton';
 import { useParams } from 'react-router-dom';

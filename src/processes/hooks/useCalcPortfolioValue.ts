@@ -3,9 +3,6 @@ import { useEffect } from 'react';
 import { ResponseAssetsType } from '../../api/api';
 
 export const useCalcPortfolioValue = (currencies: ResponseAssetsType | null) => {
-  const oldStringifyWalletValue = localStorage.getItem('walletValue');
-  const oldWalletValue = oldStringifyWalletValue ? +oldStringifyWalletValue : 0;
-
   const usdSum = { sum: 0 };
 
   const usersCurrencies = getUsersCurrencies();
@@ -18,22 +15,21 @@ export const useCalcPortfolioValue = (currencies: ResponseAssetsType | null) => 
       usdSum.sum = usdSum.sum + newUsdValue;
     }
   }
-  return { newValue: usdSum.sum, oldValue: oldWalletValue };
+  return { newValue: usdSum.sum };
 };
 
-export const useGetPortfolioValue = (
-  setValue: (portfolioValue: PortfolioValueType) => void,
-  userCurrencies: ResponseAssetsType | null
-) => {
-  const { newValue, oldValue } = useCalcPortfolioValue(userCurrencies);
+export const useGetPortfolioValue = (userCurrencies: ResponseAssetsType | null) => {
+  const oldStringifyWalletValue = localStorage.getItem('walletValue');
+  console.log('old', oldStringifyWalletValue);
+  const oldValue = oldStringifyWalletValue ? +oldStringifyWalletValue : 0;
+
+  const { newValue } = useCalcPortfolioValue(userCurrencies);
   const walletDifference = newValue - oldValue;
   const percent = newValue / (oldValue / 100) - 100;
   const walletPercentDifference = isNaN(percent) ? 0 : percent;
 
-  useEffect(() => {
-    localStorage.setItem('walletValue', String(newValue));
-    setValue({ newValue, walletDifference, walletPercentDifference });
-  }, [userCurrencies]);
+  localStorage.setItem('walletValue', String(newValue));
+  return { newValue, walletDifference, walletPercentDifference };
 };
 
 export type PortfolioValueType = {

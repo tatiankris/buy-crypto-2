@@ -1,9 +1,14 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { PortfolioContext } from '../../app/App';
+import { useGetPortfolioValue } from '../../processes/hooks/useCalcPortfolioValue';
 
 function PortfolioValue() {
-  const { portfolioValue } = useContext(PortfolioContext);
-  const { newValue, walletDifference, walletPercentDifference } = portfolioValue;
+  const { userCurrencies } = useContext(PortfolioContext);
+
+  const { newValue, walletDifference, walletPercentDifference } = useGetPortfolioValue(
+    userCurrencies ? userCurrencies : null
+  );
+
   return (
     <span>
       {`${String(newValue).slice(0, 9)} ${walletDifference > 0 ? '+' : ''}${String(
