@@ -11,3 +11,40 @@ export const getUsersCurrenciesIds = (): Array<number> => {
     ? localStorageParsedData.map((c: { id: string; value: number }) => c.id)
     : [];
 };
+
+export const setUsersCurrency = (
+  id: string,
+  value: number,
+  oldValue: { value: number; id: string } | null
+) => {
+  const localState = getUsersCurrencies();
+  const newLocalState = oldValue
+    ? localState.map((c) =>
+        c.id === id
+          ? {
+              ...c,
+              value: c.value + value,
+            }
+          : c
+      )
+    : [
+        ...localState,
+        {
+          id,
+          value,
+        },
+      ];
+  localStorage.setItem('usersCurrencies', JSON.stringify(newLocalState));
+};
+
+export const deleteUsersCurrency = (id: string) => {
+  const localState = getUsersCurrencies();
+  const newLocalState = localState.filter((c) => c.id !== id);
+  localStorage.setItem('usersCurrencies', JSON.stringify(newLocalState));
+};
+
+export const getWalletOldValue = () => {
+  const oldStringifyWalletValue = localStorage.getItem('walletValue');
+  !oldStringifyWalletValue && localStorage.setItem('walletValue', '0');
+  return oldStringifyWalletValue ? +oldStringifyWalletValue : 0;
+};

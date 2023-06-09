@@ -1,13 +1,12 @@
-
-  .portfolioButton {
+.portfolioButton {
     display: block;
     border: none;
     border-radius: 12px;
     height: 48px;
     width: 48px;
     cursor: pointer;
-    background-color: rgba(222, 186, 144, 0.27);
+    background-color: rgb(246 250 254);
     &:hover {
-      background-color: rgba(222, 186, 144, 0.14);
+      background-color: rgb(188 211 225 / 53%);
     }
   }

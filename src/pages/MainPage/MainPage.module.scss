@@ -1,7 +1,12 @@
 .main {
   text-align: start;
   padding: 40px 0;
-  min-height: calc(100vh - 80px);
+  min-height: calc(100vh - 120px);
+  h2 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #615e5e;
+  }
 }
 
 

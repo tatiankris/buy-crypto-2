@@ -23,7 +23,7 @@ function CurrencyCard({ type, currency, userCurrencies, ...props }: PropsType) {
       <td className={style.column}>{c.name}</td>
       {type === 'portfolio' && <td className={style.column}>{userValue?.slice(0, 9)}</td>}
       <td className={style.column}>{c.priceUsd.slice(0, 9)}</td>
-      {type === 'main' && <td className={style.column}>{c.changePercent24Hr}</td>}
+      {type === 'main' && <td className={style.column}>{c.changePercent24Hr.slice(0, 9)}</td>}
       {type === 'main' && (
         <td className={style.column}>
           <AddCurrencyButton id={c.id} />

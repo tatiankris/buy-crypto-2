@@ -4,18 +4,15 @@
   border-radius: 12px;
   border-collapse: collapse;
   text-align: center;
-
   .thead {
-    font-size: 18px;
     height: 40px;
     text-align: center;
     text-transform: uppercase;
     color: rgba(144, 142, 142, 0.81);
-
     tr {
       th {
         font-weight: 400;
-        border-bottom: 3px solid rgba(203, 130, 57, 0.19);
+        border-bottom: 4px solid rgb(244 247 251);
         &:first-child {
           padding-left: 3%;
         }
@@ -25,18 +22,13 @@
       }
     }
   }
-
   .tbody {
-    font-size: 18px;
-
     .row:last-child {
       border-bottom: hidden;
     }
   }
-
   .tbody__loading {
     height: 360px;
-
     .tbody__loading__text {
       position: absolute;
       top: 50%;
@@ -44,42 +36,3 @@
     }
   }
 }
-
-//
-//table {
-//  width: 100%;
-//  margin-bottom: 20px;
-//  text-align: center;
-//  border-collapse: collapse;
-//  thead {
-//    font-size: 16px;
-//    text-transform: uppercase;
-//    color: #dedede;
-//    tr th {
-//      font-weight: normal;
-//    }
-//  }
-//  tbody {
-//    tr {
-//      height: 40px;
-//      background-color: #343333;
-//      border-radius: 8px;
-//      border-bottom: 1px solid darkgrey;
-//      td {
-//        .delete {
-//          cursor: pointer;
-//          color: #9e1b1b;
-//          border: 1px solid #aa2020;
-//          background-color: grey;
-//          border-radius: 8px;
-//          &:hover {
-//            background-color: #5a5555;
-//          }
-//          &:active {
-//            background-color: grey;
-//          }
-//        }
-//      }
-//    }
-//  }
-//}

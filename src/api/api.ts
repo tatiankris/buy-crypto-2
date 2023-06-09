@@ -38,3 +38,5 @@ export type ResponseItemType = {
 };
 
 export type AxiosResponseType<T> = { data: T };
+
+export type CurrencyHistoryType = Array<{ date: string; priceUsd: string; time: number }>;

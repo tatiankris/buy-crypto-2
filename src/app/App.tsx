@@ -1,27 +1,30 @@
-import React, { useMemo } from 'react';
+import React, { useEffect } from 'react';
 import Header from '../components/Header/Header';
 import Routing from '../pages/Routing';
 import style from './App.module.scss';
 import { withProviders } from './providers/with-providers';
-import { ResponseAssetsType } from '../api/api';
-import { useGetCurrenciesByIds } from '../processes/query/useGetCurrenciesByIds';
-
-export const UserCurrenciesContext = React.createContext({
-  userCurrencies: [] as ResponseAssetsType | null,
-});
+import { useProfileStore } from '../store/portfolio-store';
 
 function App() {
-  const { data } = useGetCurrenciesByIds();
-  const userCurrencies = useMemo(() => data?.data, [data?.data]);
+  const fetchUsersCurrencies = useProfileStore((state) => state.fetchUsersCurrencies);
+  const addCurrenciesWallet = useProfileStore((state) => state.addCurrenciesWallet);
+  const addProfileValue = useProfileStore((state) => state.addProfileValue);
+  const usersCurrencies = useProfileStore((state) => state.usersCurrencies);
+  const currenciesWallet = useProfileStore((state) => state.currenciesWallet);
+
+  useEffect(() => {
+    fetchUsersCurrencies();
+    addCurrenciesWallet();
+  }, []);
+
+  useEffect(() => {
+    currenciesWallet && usersCurrencies && addProfileValue();
+  }, [currenciesWallet, usersCurrencies]);
   return (
-    <UserCurrenciesContext.Provider
-      value={{ userCurrencies: userCurrencies ? userCurrencies : null }}
-    >
-      <div className={style.app}>
-        <Header />
-        <Routing />
-      </div>
-    </UserCurrenciesContext.Provider>
+    <div className={style.app}>
+      <Header />
+      <Routing />
+    </div>
   );
 }
 

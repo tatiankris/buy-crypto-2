@@ -1,10 +1,9 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import style from './AddCurrencyModal.module.scss';
 import CLoseButton from '../../shared/CloseButton/CLoseButton';
 import { useParams } from 'react-router-dom';
-import { useGetCurrency } from '../../processes/query/useGetCurrency';
-import { addInPortfolio } from '../../processes/updatePortfolio';
-import { useGetCurrenciesByIds } from '../../processes/query/useGetCurrenciesByIds';
+import { useProfileStore } from '../../store/portfolio-store';
+import { useCurrencyStore } from '../../store/currency-store';
 
 type PropsType = {
   handleClose: () => void;
@@ -12,14 +11,15 @@ type PropsType = {
 
 function AddCurrencyModal({ handleClose, ...props }: PropsType) {
   const { currencyId } = useParams();
+  const addCurrency = useProfileStore((state) => state.addCurrency);
+  const currency = useCurrencyStore((state) => state.currentCurrency);
+  const setCurrentCurrency = useCurrencyStore((state) => state.setCurrentCurrency);
 
-  const { data } = useGetCurrency(currencyId ? currencyId : null);
-  const currency = useMemo(() => data?.data.data, [data?.data.data]);
-
+  useEffect(() => {
+    currencyId && setCurrentCurrency(currencyId);
+  }, []);
   const [cryptoValue, setCryptoValue] = useState<number>(0);
   const [usdValue, setUsdValue] = useState<number>(0);
-
-  const { refetch } = useGetCurrenciesByIds();
 
   if (!currency) {
     return <div>Not found</div>;
@@ -35,11 +35,7 @@ function AddCurrencyModal({ handleClose, ...props }: PropsType) {
   };
   const addCurrencyHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const newPortfolioData = addInPortfolio(currency.id, cryptoValue);
-    localStorage.setItem('usersCurrencies', JSON.stringify(newPortfolioData));
-
-    refetch();
-
+    addCurrency(currency.id, cryptoValue);
     handleClose();
   };
 

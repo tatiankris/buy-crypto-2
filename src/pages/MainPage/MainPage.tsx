@@ -3,7 +3,7 @@ import style from './MainPage.module.scss';
 import Pagination from '../../components/Pagination/Pagination';
 import CurrenciesTable from '../../components/CurrenciesTable/CurrenciesTable';
 import { withContainerProvider } from '../../app/providers/with-providers';
-import { useGetAllCurrencies } from '../../processes/query/useGetAllCurrencies';
+import { useGetAllCurrencies } from '../../processes/hooks/useGetAllCurrencies';
 
 function MainPage() {
   const [page, setPage] = useState(0);
@@ -12,7 +12,7 @@ function MainPage() {
 
   return (
     <div className={style.main}>
-      <h2>Coins</h2>
+      <h2>Currencies</h2>
       <CurrenciesTable type={'main'} page={page} currencies={currencies ? currencies : null} />
       <Pagination itemsCount={2000} page={page} setPage={setPage} />
     </div>

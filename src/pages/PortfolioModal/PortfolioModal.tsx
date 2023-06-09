@@ -1,10 +1,10 @@
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import style from './PortfolioModal.module.scss';
 import Pagination from '../../components/Pagination/Pagination';
 import CurrenciesTable from '../../components/CurrenciesTable/CurrenciesTable';
 import CLoseButton from '../../shared/CloseButton/CLoseButton';
 import { getUsersCurrencies } from '../../processes/getLocalStorageData';
-import { useGetCurrenciesByIds } from '../../processes/query/useGetCurrenciesByIds';
+import { useProfileStore } from '../../store/portfolio-store';
 
 type PropsType = {
   handleClose: () => void;
@@ -12,11 +12,8 @@ type PropsType = {
 
 function PortfolioModal({ handleClose, ...props }: PropsType) {
   const [page, setPage] = useState(0);
+  const currencies = useProfileStore((state) => state.usersCurrencies);
 
-  const { data } = useGetCurrenciesByIds();
-  const currencies = useMemo(() => data?.data, [data?.data]);
-
-  console.log('currencies', currencies);
   return (
     <div className={style.modal} onClick={handleClose}>
       <div

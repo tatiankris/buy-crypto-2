@@ -1,13 +1,11 @@
-import React, { useContext } from 'react';
-import { UserCurrenciesContext } from '../../app/App';
-import { useGetPortfolioValue } from '../../processes/hooks/useCalcPortfolioValue';
+import React from 'react';
+import { useProfileStore } from '../../store/portfolio-store';
 
 function PortfolioValue() {
-  const { userCurrencies } = useContext(UserCurrenciesContext);
-
-  const { newValue, walletDifference, walletPercentDifference } = useGetPortfolioValue(
-    userCurrencies ? userCurrencies : null
-  );
+  const profileValue = useProfileStore((state) => state.profileValue);
+  const { newValue, walletDifference, walletPercentDifference } = profileValue
+    ? profileValue
+    : { newValue: 0, walletDifference: 0, walletPercentDifference: 0 };
 
   return (
     <span>

@@ -42,7 +42,7 @@ function Pagination({ setPage, itemsCount, ...props }: PropsType) {
           1
         </button>
       )}
-      {pages.length > 3 && <span>...</span>}
+      {page < pages.length - 3 && <span>...</span>}
       {page > 2 &&
         page < pages.length - 3 &&
         currentPages.map((p) => (
@@ -56,7 +56,7 @@ function Pagination({ setPage, itemsCount, ...props }: PropsType) {
             {p}
           </button>
         ))}
-      {pages.length > 3 && <span>...</span>}
+      {page > 2 && <span>...</span>}
       {page < pages.length - 3 && (
         <button
           onClick={() => {

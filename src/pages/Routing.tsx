@@ -3,7 +3,6 @@ import { Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-
 import MainPage from './MainPage/MainPage';
 import CurrencyPage from './CurrencyPage/CurrencyPage';
 import PortfolioModal from './PortfolioModal/PortfolioModal';
-import { withContainerProvider } from '../app/providers/with-providers';
 import AddCurrencyModal from './AddCurrencyModal/AddCurrencyModal';
 
 export const MAIN = 'main';

@@ -1,6 +1,15 @@
 import React, { useState } from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
-
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from 'recharts';
+import style from './CurrencyChart.module.scss';
 type PropsType = {
   history: Array<{ date: string; priceUsd: string; time: number }>;
 };
@@ -26,32 +35,49 @@ function CurrencyChart({ history }: PropsType) {
   }
   console.log('data', data);
   return (
-    <>
-      <input defaultChecked id={'year'} name={'chart'} type="radio" onClick={onYearHandler} />
-      <label htmlFor="year">last year</label>
-      <input id={'month'} name={'chart'} type="radio" onClick={onMonthHandler} />
-      <label htmlFor="month">last month</label>
-      <input id={'week'} name={'chart'} type="radio" onClick={onWeekHandler} />
-      <label htmlFor="week">last week</label>
-      <LineChart
-        width={700}
-        height={400}
-        data={data}
-        margin={{
-          top: 5,
-          right: 30,
-          left: 20,
-          bottom: 5,
-        }}
-      >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Line type="monotone" dataKey="price" stroke="#8884d8" activeDot={{ r: 8 }} />
-      </LineChart>
-    </>
+    <div className={style.chartBlock}>
+      <div className={style.chartBlock__radioButtons}>
+        <div>
+          <input defaultChecked id={'year'} name={'chart'} type="radio" onClick={onYearHandler} />
+          <label htmlFor="year">last year</label>
+        </div>
+        <div>
+          <input id={'month'} name={'chart'} type="radio" onClick={onMonthHandler} />
+          <label htmlFor="month">last month</label>
+        </div>
+        <div>
+          <input id={'week'} name={'chart'} type="radio" onClick={onWeekHandler} />
+          <label htmlFor="week">last week</label>
+        </div>
+      </div>
+      <ResponsiveContainer className={style.chartBlock__chart} width="110%" height="100%">
+        <LineChart
+          data={data}
+          width={300}
+          height={200}
+          margin={{
+            top: 20,
+            right: 4,
+            left: 0,
+            bottom: 0,
+          }}
+        >
+          <CartesianGrid strokeDasharray="4 4" />
+          <XAxis fontSize={10} className={style.chart__names} dataKey="name" />
+          <YAxis fontSize={10} className={style.chart__names} />
+          <Tooltip />
+          <Legend fontSize={10} />
+          <Line
+            fontSize={10}
+            type="monotone"
+            dataKey="price"
+            stroke="#8884d8"
+            activeDot={{ r: 8 }}
+            legendType={'none'}
+          />
+        </LineChart>
+      </ResponsiveContainer>
+    </div>
   );
 }
 export default CurrencyChart;

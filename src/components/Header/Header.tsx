@@ -12,9 +12,9 @@ function Header() {
   };
   return (
     <div className={style.header}>
-      <div onClick={handleMain} className={style.logo}>
-        BuyCrypto
-      </div>
+      {/*<div onClick={handleMain} className={style.logo}>*/}
+      {/*  BuyCrypto*/}
+      {/*</div>*/}
       <div className={style.portfolio}>
         <PortfolioValue />
         <PortfolioButton />
