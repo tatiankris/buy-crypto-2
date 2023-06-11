@@ -32,10 +32,12 @@ export const useProfileStore = create<PortfolioStateType>((set) => ({
   usersCurrencies: null,
   fetchUsersCurrencies: async () => {
     const userCurrenciesIds = getUsersCurrenciesIds();
-    const { data } = await coinsAPI.getAssetsWithIds(userCurrenciesIds.join());
-    set(() => {
-      return { usersCurrencies: data };
-    });
+    if (!!userCurrenciesIds.length) {
+      const { data } = await coinsAPI.getAssetsWithIds(userCurrenciesIds.join());
+      set(() => {
+        return { usersCurrencies: data };
+      });
+    }
   },
   addProfileValue: () => {
     set((state) => {

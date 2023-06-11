@@ -3,7 +3,7 @@ import style from './CurrencyPage.module.scss';
 import AddCurrencyButton from '../../components/AddCurrencyButton/AddCurrencyButton';
 import { withContainerProvider } from '../../app/providers/with-providers';
 import { useParams } from 'react-router-dom';
-import CurrencyChart from 'components/CurrencyChart/CurrencyChart';
+import CurrencyChart from 'components/CurrencyInfoBlock/CurrencyChart/CurrencyChart';
 import { useCurrencyStore } from '../../store/currency-store';
 import CurrencyInfoBlock from '../../components/CurrencyInfoBlock/CurrencyInfoBlock';
 

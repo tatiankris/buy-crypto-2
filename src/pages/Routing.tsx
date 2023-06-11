@@ -2,8 +2,8 @@ import React from 'react';
 import { Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import MainPage from './MainPage/MainPage';
 import CurrencyPage from './CurrencyPage/CurrencyPage';
-import PortfolioModal from './PortfolioModal/PortfolioModal';
-import AddCurrencyModal from './AddCurrencyModal/AddCurrencyModal';
+import PortfolioModal from '../components/ModalsComponents/PortfolioModal/PortfolioModal';
+import AddCurrencyModal from '../components/ModalsComponents/AddCurrencyModal/AddCurrencyModal';
 
 export const MAIN = 'main';
 

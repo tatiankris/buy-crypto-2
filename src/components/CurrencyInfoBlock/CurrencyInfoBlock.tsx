@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { ResponseItemType } from '../../api/api';
 import style from './CurrencyInfoBlock.module.scss';
 type PropsType = {

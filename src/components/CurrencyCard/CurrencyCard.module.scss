@@ -1,18 +1,10 @@
 .row {
-  height: 60px;
   color: #575757;
-  cursor: pointer;
-  &:hover {
-    background-color: rgba(244, 247, 251, 0.59);
-  }
-  &:active {
-    background-color: #e6eef8;
-  }
   .column {
+    max-width: 74px;
+    padding: 20px 0 20px 4px;
+    word-wrap: break-word;
     border-bottom: 6px solid rgb(244 247 251);
-    &:first-child {
-      padding-left: 3%;
-    }
     &:nth-child(-n+2) {
       text-align: left;
     }
@@ -20,8 +12,17 @@
       text-align: center;
     }
     &:last-child {
-      padding-right: 8px;
+      padding-right: 4px;
     }
   }
 
+}
+.row_Main {
+  cursor: pointer;
+  &:hover {
+    background-color: rgba(244, 247, 251, 0.59);
+  }
+  &:active {
+    background-color: #e6eef8;
+  }
 }

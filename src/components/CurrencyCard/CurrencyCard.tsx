@@ -15,11 +15,14 @@ function CurrencyCard({ type, currency, userCurrencies, ...props }: PropsType) {
   const userCurrency = userCurrencies && userCurrencies.find((v) => v.id === c.id);
   const userValue = userCurrency && String(userCurrency.value);
   const handleCurrencyPage = () => {
-    navigate(`${c.id}`);
+    type === 'main' && navigate(`${c.id}`);
   };
 
   return (
-    <tr onClick={handleCurrencyPage} className={style.row}>
+    <tr
+      onClick={handleCurrencyPage}
+      className={`${style.row} ${type === 'main' ? style.row_Main : ''}`}
+    >
       <td className={style.column}>{c.name}</td>
       {type === 'portfolio' && <td className={style.column}>{userValue?.slice(0, 9)}</td>}
       <td className={style.column}>{c.priceUsd.slice(0, 9)}</td>

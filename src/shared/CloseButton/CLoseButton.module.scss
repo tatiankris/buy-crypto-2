@@ -1,10 +1,13 @@
 .close {
   font-weight: bold;
-  color: white;
+  color: #939191;
   position: absolute;
   top: 6px;
   right: 6px;
   cursor: pointer;
   border: none;
   background-color: rgba(255, 255, 255, 0);
+  &:hover {
+    color: #635d5d;
+  }
 }

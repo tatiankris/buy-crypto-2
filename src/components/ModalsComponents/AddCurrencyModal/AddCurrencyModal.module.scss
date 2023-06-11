@@ -1,0 +1,29 @@
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: start;
+  justify-content: center;
+  input {
+    width: 100%;
+    outline: none;
+    height: 40px;
+    border: 1px solid grey;
+    border-radius: 8px;
+  }
+  .submit {
+    border: none;
+    height: 40px;
+    border-radius: 8px;
+    width: 80px;
+    cursor: pointer;
+    background-color: #dedede;
+    &:hover {
+      background-color: #d0cfcf;
+    }
+    &:disabled {
+      cursor: auto;
+      background-color: #dedede;
+    }
+  }
+}
