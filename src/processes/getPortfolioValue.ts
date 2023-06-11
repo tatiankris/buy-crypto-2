@@ -21,7 +21,7 @@ export const getPortfolioValue = (
 
 export const getPortfolioValues = (oldValue: number, newValue: number) => {
   const walletDifference = newValue - oldValue;
-  const percent = newValue / (oldValue / 100) - 100;
+  const percent = oldValue === 0 ? newValue : newValue / (oldValue / 100) - 100;
   const walletPercentDifference = isNaN(percent) ? 0 : percent;
   return { newValue, walletDifference, walletPercentDifference };
 };
