@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   LineChart,
   Line,
@@ -20,25 +20,39 @@ function CurrencyChart({ history }: PropsType) {
         return { name: el.date.slice(0, 10), price: +el.priceUsd };
       })
     : null;
+
   const [data, setData] = useState(dataArr);
+  const inputRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    setData(dataArr);
+    inputRef.current!.checked = true;
+  }, [history]);
+
   const onMonthHandler = () => {
-    setData(dataArr && dataArr.slice(-30));
+    setData(dataArr && [...dataArr.slice(-30)]);
   };
   const onYearHandler = () => {
     setData(dataArr && dataArr);
   };
   const onWeekHandler = () => {
-    setData(dataArr && dataArr.slice(-7));
+    setData(dataArr && [...dataArr.slice(-7)]);
   };
   if (!data) {
     return <div>No chart data</div>;
   }
-  console.log('data', data);
   return (
     <div className={style.chartBlock}>
       <div className={style.chartBlock__radioButtons}>
         <div>
-          <input defaultChecked id={'year'} name={'chart'} type="radio" onClick={onYearHandler} />
+          <input
+            ref={inputRef}
+            defaultChecked
+            id={'year'}
+            name={'chart'}
+            type="radio"
+            onClick={onYearHandler}
+          />
           <label htmlFor="year">last year</label>
         </div>
         <div>
