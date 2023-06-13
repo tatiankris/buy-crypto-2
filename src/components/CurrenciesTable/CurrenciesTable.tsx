@@ -1,6 +1,6 @@
 import style from './CurrenciesTable.module.scss';
 import React from 'react';
-import CurrencyCard from '../CurrencyCard/CurrencyCard';
+import CurrencyRow from '../CurrencyRow/CurrencyRow';
 import { ResponseAssetsType } from '../../api/api';
 
 type PropsType = {
@@ -12,31 +12,40 @@ type PropsType = {
 
 function CurrenciesTable({ type, page, currencies, userCurrencies, ...props }: PropsType) {
   return (
-    <table className={style.table}>
-      <thead className={style.thead}>
-        <tr>
-          <th>name</th>
-          {type === 'portfolio' && <th>coins</th>}
-          <th>usd</th>
-          {type === 'main' && <th>24h change</th>}
-          {type === 'main' && <th>buy</th>}
-          {type === 'portfolio' && <th>delete</th>}
-        </tr>
-      </thead>
-      {currencies && (
-        <tbody className={style.tbody}>
-          {currencies &&
-            currencies.map((c) => (
-              <CurrencyCard userCurrencies={userCurrencies} type={type} key={c.id} currency={c} />
+    <div className={style.table__wrapper}>
+      <table
+        className={type === 'portfolio' ? `${style.portfolioTable} ${style.table}` : style.table}
+      >
+        <thead className={style.thead}>
+          <tr>
+            <th>Name</th>
+            {type === 'portfolio' && <th className={style.usersCountTH}>Count</th>}
+            <th>Price</th>
+            {type === 'main' && <th>24h %</th>}
+            {type === 'main' && <th>Market Cap</th>}
+            {type === 'main' && <th>Circulating Supply</th>}
+            {type === 'main' && <th>VWAP 24h</th>}
+            {type === 'main' && <th>buy</th>}
+            {type === 'portfolio' && <th>Delete</th>}
+          </tr>
+        </thead>
+        {currencies && (
+          <tbody className={style.tbody}>
+            {currencies &&
+              currencies.map((c) => (
+                <CurrencyRow userCurrencies={userCurrencies} type={type} key={c.id} currency={c} />
+              ))}
+          </tbody>
+        )}
+        {!currencies && (
+          <tbody className={style.tbody__loading}>
+            {[...Array(6)].map((item, index) => (
+              <CurrencyRow key={index} type={type} currency={'loading'} />
             ))}
-        </tbody>
-      )}
-      {!currencies && (
-        <tbody className={style.tbody__loading}>
-          <div className={style.tbody__loading__text}>Loading...</div>
-        </tbody>
-      )}
-    </table>
+          </tbody>
+        )}
+      </table>
+    </div>
   );
 }
 

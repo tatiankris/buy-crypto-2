@@ -34,7 +34,7 @@ function TopCurrencies() {
           </div>
           {openTop && (
             <ModalContainer handleClose={handleCloseTop} nameText={'Top 3 Currencies'}>
-              <TopCurrenciesList currencies={currencies} />
+              <TopCurrenciesList currencies={currencies} handleClose={handleCloseTop} />
             </ModalContainer>
           )}
         </>

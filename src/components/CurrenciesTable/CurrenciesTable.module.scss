@@ -1,40 +1,68 @@
-.table {
-  background-color: white;
-  width: 100%;
+.table__wrapper {
+  overflow-x: auto;
   border-radius: 8px;
-  border-collapse: collapse;
-  text-align: center;
-  .thead {
+  .table {
+    background-color: white;
+    width: 100%;
+    min-width: 600px;
+    border-radius: 8px;
+    border-collapse: collapse;
     text-align: center;
-    text-transform: uppercase;
-    color: rgba(144, 142, 142, 0.81);
-    tr {
-
-      th {
-        overflow-wrap: break-word;
-        padding: 10px 0 10px 4px;
-        font-weight: 400;
-        border-bottom: 4px solid rgb(244 247 251);
-        &:last-child {
-          padding-right: 4px;
+    .thead {
+      font-size: 12px;
+      text-align: center;
+      color: rgba(144, 142, 142, 0.81);
+      tr {
+        th {
+          position: sticky;
+          overflow-wrap: break-word;
+          padding: 10px 4px 10px 4px;
+          font-weight: 600;
+          border-bottom: 4px solid rgb(244 247 251);
+          text-align: right;
+          width: 15.8%;
+          &:last-child {
+            width: 6%;
+            text-align: center;
+          }
+          &:first-child {
+            text-align: left;
+          }
         }
-        &:nth-child(-n+2) {
-          text-align: left;
+        .usersCountTH {
+            &:nth-child(-n+2) {
+              text-align: left;
+            }
         }
       }
     }
-  }
-  .tbody {
-    .row:last-child {
-      border-bottom: hidden;
+    .tbody {
+      font-size: 14px;
+      color: rgb(106, 106, 106);
+      font-weight: 600;
+      .row:last-child {
+        border-bottom: hidden;
+      }
+    }
+    .tbody__loading {
+      .tbody__loading__text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+      }
     }
   }
-  .tbody__loading {
-    height: 360px;
-    .tbody__loading__text {
-      position: absolute;
-      top: 50%;
-      left: 50%;
+  .portfolioTable {
+    min-width: 240px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .table__wrapper {
+    .table {
+      .tbody {
+        font-size: 12px;
+      }
     }
   }
 }

@@ -1,27 +1,36 @@
 import React from 'react';
 import { ResponseItemType } from '../../api/api';
 import style from './CurrencyInfoBlock.module.scss';
+import { refactorNum } from '../../processes/abbrNum';
 type PropsType = {
   currency: ResponseItemType;
 };
 function CurrencyInfoBlock({ currency }: PropsType) {
+  const c = {} as ResponseItemType;
+  if (currency) {
+    let prop: keyof ResponseItemType;
+    for (prop in currency) {
+      c[prop] = refactorNum(+currency[prop]);
+    }
+  }
+
   return (
     <div className={style.currencyInfoBlock}>
       <table>
         <thead>
           <tr>
-            <th>USD</th>
-            <th>Change 24 h</th>
-            <th>Market Cap Usd</th>
+            <th>Price</th>
+            <th>24h Change</th>
+            <th>Market Cap</th>
             <th>Max Supply</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>{currency.priceUsd.slice(0, 7)}</td>
-            <td>{`${currency.changePercent24Hr.slice(0, 7)}%`}</td>
-            <td>{currency.marketCapUsd.slice(0, 5)}</td>
-            <td>{currency.maxSupply ? currency.maxSupply.slice(0, 5) : ''}</td>
+            <td>{c.priceUsd}</td>
+            <td>{`${c.changePercent24Hr}%`}</td>
+            <td>{`$${c.marketCapUsd}`}</td>
+            <td>{`${c.maxSupply} ${currency.symbol}`}</td>
           </tr>
         </tbody>
       </table>
@@ -30,16 +39,16 @@ function CurrencyInfoBlock({ currency }: PropsType) {
           <tr>
             <th>Symbol</th>
             <th>Supply</th>
-            <th>Usd 24 h</th>
-            <th>Vwap 24 h</th>
+            <th>24h USD</th>
+            <th>24h VWAP</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>{currency.symbol.slice(0, 7)}</td>
-            <td>{currency.supply.slice(0, 7)}</td>
-            <td>{`${currency.volumeUsd24Hr.slice(0, 7)}$`}</td>
-            <td>{currency.vwap24Hr.slice(0, 7)}</td>
+            <td>{currency.symbol}</td>
+            <td>{`${c.supply} ${currency.symbol}`}</td>
+            <td>{`$${c.volumeUsd24Hr}`}</td>
+            <td>{`$${c.vwap24Hr}`}</td>
           </tr>
         </tbody>
       </table>

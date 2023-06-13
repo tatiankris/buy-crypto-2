@@ -9,7 +9,7 @@ function MainPage() {
   const [page, setPage] = useState(0);
   const { data } = useGetAllCurrencies(page);
   const currencies = useMemo(() => data?.data, [data?.data]);
-
+  console.log(currencies);
   return (
     <div className={style.main}>
       <h2>Currencies</h2>

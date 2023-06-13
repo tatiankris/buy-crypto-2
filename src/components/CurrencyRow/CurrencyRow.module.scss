@@ -1,0 +1,46 @@
+.row {
+  .column {
+    padding: 4px 4px 4px 6px;
+    height: 70px;
+    white-space: nowrap;
+    border-bottom: 6px solid rgb(244 247 251);
+    text-align: right;
+    &:last-child {
+      text-align: center;
+    }
+    &:first-child {
+      text-align: left;
+    }
+    .column__symbol {
+      color: rgb(172, 172, 179);
+    }
+    .column_usersCount {
+      color: #6d41ff;
+    }
+  }
+  .usersCountColumn {
+    &:nth-child(-n+2) {
+      text-align: left;
+    }
+  }
+  .name {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    gap: 2px;
+    .name__icon {
+      height: 20px;
+      width: 20px;
+    }
+  }
+}
+.row_Main {
+  cursor: pointer;
+  &:hover {
+    background-color: rgba(244, 247, 251, 0.59);
+  }
+  &:active {
+    background-color: #e6eef8;
+  }
+}

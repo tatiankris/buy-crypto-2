@@ -25,7 +25,9 @@ function PortfolioModal({ handleClose, ...props }: PropsType) {
             type={'portfolio'}
             currencies={currencies.length ? currencies.slice(page * 6, page * 6 + 6) : null}
           />
-          <Pagination itemsCount={currencies.length} page={page} setPage={setPage} />
+          {currencies.length > 6 && (
+            <Pagination itemsCount={currencies.length} page={page} setPage={setPage} />
+          )}
         </div>
       )}
     </ModalContainer>

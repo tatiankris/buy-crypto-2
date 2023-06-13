@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import style from './PortfolioButton.module.scss';
 import { ReactComponent as IconPortfolio } from '../../assets/wallet.svg';
 import { useLocation, useNavigate } from 'react-router-dom';

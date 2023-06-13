@@ -4,13 +4,15 @@ import style from './TopCurrenciesList.module.scss';
 import { useNavigate } from 'react-router-dom';
 type PropsType = {
   currencies: ResponseAssetsType;
+  handleClose?: () => void;
 };
 
-function TopCurrenciesList({ currencies }: PropsType) {
+function TopCurrenciesList({ currencies, handleClose }: PropsType) {
   const navigate = useNavigate();
 
   const handleCurrencyPage = (i: number) => {
     currencies && navigate(`currencies/${currencies[i].id}`);
+    handleClose && handleClose();
   };
   return (
     <div className={style.topCrypto__Box}>
