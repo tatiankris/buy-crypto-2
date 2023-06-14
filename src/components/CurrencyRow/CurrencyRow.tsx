@@ -50,9 +50,11 @@ function CurrencyRow({ type, currency, userCurrencies, ...props }: PropsType) {
     >
       <td className={`${style.column}`}>
         <div className={`${style.name}`}>
-          <div className={`${style.name__icon}`}>
-            <CryptoIcon name={currency.symbol.toLowerCase()} size={20} />
-          </div>
+          {type === 'main' && (
+            <div className={`${style.name__icon}`}>
+              <CryptoIcon name={currency.symbol.toLowerCase()} size={20} />
+            </div>
+          )}
           <div>
             {`${currency.name} `}
             {type === 'main' && <span className={style.column__symbol}>{currency.symbol}</span>}
