@@ -23,7 +23,9 @@ export function abbrNum(number: number, decPlaces: number) {
   return { number, abb: abb.num };
 }
 
-export function refactorNum(num: number) {
-  const numObj = abbrNum(num, 3);
-  return num < 100000 ? num.toLocaleString() : String(numObj.number) + numObj.abb;
+export function refactorNum(num: number, decPlaces: number) {
+  const numObj = abbrNum(num, decPlaces);
+  return num < 100000
+    ? num.toLocaleString('en-IN', decPlaces === 0 ? { maximumSignificantDigits: 4 } : {})
+    : String(numObj.number) + numObj.abb;
 }

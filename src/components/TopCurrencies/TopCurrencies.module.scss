@@ -1,13 +1,15 @@
 .topCrypto {
+  height: 48px;
   font-size: 14px;
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 2%;
   .topCrypto__Button {
+    height: 100%;
     background-color: rgb(246 250 254);
     text-align: center;
-    padding: 12px 0;
+    padding: 16px 0;
     width: 50px;
     font-size: 14px;
     border-radius: 5px;

@@ -10,7 +10,7 @@ function CurrencyInfoBlock({ currency }: PropsType) {
   if (currency) {
     let prop: keyof ResponseItemType;
     for (prop in currency) {
-      c[prop] = refactorNum(+currency[prop]);
+      c[prop] = refactorNum(+currency[prop], 3);
     }
   }
 

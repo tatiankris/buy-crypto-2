@@ -38,12 +38,15 @@
     align-items: center;
     gap: 4%;
   }
+  .portfolio_withoutValue {
+    justify-content: right;
+  }
 }
 @media screen and (max-width: 490px) {
   .logo {
     .logo__svg {
       width: 20px;
-      height: 44px;
+      height: 48px;
     }
     span {
       display: none;

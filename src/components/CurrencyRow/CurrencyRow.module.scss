@@ -44,3 +44,11 @@
     background-color: #e6eef8;
   }
 }
+@media screen and (max-width: 420px) {
+  .row {
+    .column {
+      &:first-child {
+        white-space: normal;
+      }
+    }}
+}

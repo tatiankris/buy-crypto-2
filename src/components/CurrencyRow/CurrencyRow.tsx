@@ -6,13 +6,17 @@ import DeleteCurrencyButton from '../../shared/DeleteCurrencyButton/DeleteCurren
 import { ResponseItemType } from '../../api/api';
 import CryptoIcon from '../../shared/CryptoIcon';
 import { refactorNum } from '../../processes/abbrNum';
+import { useResize } from '../../processes/hooks/useResize';
 
 type PropsType = {
   currency: ResponseItemType | 'loading';
   type: 'portfolio' | 'main';
   userCurrencies?: Array<{ id: string; value: number }>;
+  smallScreen: boolean;
 };
-function CurrencyRow({ type, currency, userCurrencies, ...props }: PropsType) {
+function CurrencyRow({ type, currency, userCurrencies, smallScreen, ...props }: PropsType) {
+  const windowSize = useResize();
+  const smallerScreen = windowSize < 420;
   const navigate = useNavigate();
   const userCurrency =
     userCurrencies && currency !== 'loading' && userCurrencies.find((v) => v.id === currency.id);
@@ -38,17 +42,17 @@ function CurrencyRow({ type, currency, userCurrencies, ...props }: PropsType) {
   if (currency) {
     let prop: keyof ResponseItemType;
     for (prop in currency) {
-      c[prop] = refactorNum(+currency[prop]);
+      c[prop] = refactorNum(+currency[prop], smallScreen ? 3 : 0);
     }
   }
-  const userCount = userValue ? refactorNum(userValue) : '';
+  const userCount = userValue ? refactorNum(userValue, 3) : '';
 
   return (
     <tr
       onClick={handleCurrencyPage}
       className={`${style.row} ${type === 'main' ? style.row_Main : ''}`}
     >
-      <td className={`${style.column}`}>
+      <td className={`${style.column} ${smallerScreen && style.column_smaller}`}>
         <div className={`${style.name}`}>
           {type === 'main' && (
             <div className={`${style.name__icon}`}>
@@ -57,7 +61,12 @@ function CurrencyRow({ type, currency, userCurrencies, ...props }: PropsType) {
           )}
           <div>
             {`${currency.name} `}
-            {type === 'main' && <span className={style.column__symbol}>{currency.symbol}</span>}
+            {type === 'main' && !smallerScreen && (
+              <span className={style.column__symbol}>{currency.symbol}</span>
+            )}
+            {type === 'main' && smallerScreen && (
+              <div className={style.column__symbol}>{currency.symbol}</div>
+            )}
           </div>
         </div>
       </td>
@@ -70,8 +79,10 @@ function CurrencyRow({ type, currency, userCurrencies, ...props }: PropsType) {
       <td className={style.column}>{`$${c.priceUsd}`}</td>
       {type === 'main' && <td className={style.column}>{`${c.changePercent24Hr}%`}</td>}
       {type === 'main' && <td className={style.column}>{`$${c.marketCapUsd}`}</td>}
-      {type === 'main' && <td className={`${style.column}`}>{`${c.supply} ${currency.symbol}`}</td>}
-      {type === 'main' && <td className={style.column}>{`$${c.vwap24Hr}`}</td>}
+      {type === 'main' && smallScreen && (
+        <td className={`${style.column}`}>{`${c.supply} ${currency.symbol}`}</td>
+      )}
+      {type === 'main' && smallScreen && <td className={style.column}>{`$${c.vwap24Hr}`}</td>}
       {type === 'main' && (
         <td className={style.column}>
           <AddCurrencyButton id={currency.id} />

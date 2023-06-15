@@ -1,10 +1,8 @@
 .table__wrapper {
-  overflow-x: auto;
   border-radius: 8px;
   .table {
     background-color: white;
     width: 100%;
-    min-width: 600px;
     border-radius: 8px;
     border-collapse: collapse;
     text-align: center;
@@ -14,7 +12,6 @@
       color: rgba(144, 142, 142, 0.81);
       tr {
         th {
-          position: sticky;
           overflow-wrap: break-word;
           padding: 10px 4px 10px 4px;
           font-weight: 600;

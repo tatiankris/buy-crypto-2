@@ -10,6 +10,7 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import style from './CurrencyChart.module.scss';
+import { useResize } from '../../../processes/hooks/useResize';
 type PropsType = {
   history: Array<{ date: string; priceUsd: string; time: number }>;
 };
@@ -23,7 +24,7 @@ function CurrencyChart({ history }: PropsType) {
 
   const [data, setData] = useState(dataArr);
   const inputRef = useRef<HTMLInputElement | null>(null);
-
+  const windowSize = useResize();
   useEffect(() => {
     setData(dataArr);
     inputRef.current!.checked = true;
@@ -44,7 +45,7 @@ function CurrencyChart({ history }: PropsType) {
   return (
     <div className={style.chartBlock}>
       <div className={style.chartBlock__radioButtons}>
-        <div>
+        <div className={style.radioButtons__button}>
           <input
             ref={inputRef}
             defaultChecked
@@ -53,18 +54,18 @@ function CurrencyChart({ history }: PropsType) {
             type="radio"
             onClick={onYearHandler}
           />
-          <label htmlFor="year">last year</label>
+          <label htmlFor="year">Last year</label>
         </div>
-        <div>
+        <div className={style.radioButtons__button}>
           <input id={'month'} name={'chart'} type="radio" onClick={onMonthHandler} />
-          <label htmlFor="month">last month</label>
+          <label htmlFor="month">Last month</label>
         </div>
-        <div>
+        <div className={style.radioButtons__button}>
           <input id={'week'} name={'chart'} type="radio" onClick={onWeekHandler} />
-          <label htmlFor="week">last week</label>
+          <label htmlFor="week">Last week</label>
         </div>
       </div>
-      <ResponsiveContainer className={style.chartBlock__chart} width="110%" height="100%">
+      <ResponsiveContainer className={style.chartBlock__chart} width="110%" height="94%">
         <LineChart
           data={data}
           width={300}
@@ -79,7 +80,7 @@ function CurrencyChart({ history }: PropsType) {
           <CartesianGrid strokeDasharray="4 4" />
           <XAxis fontSize={10} className={style.chart__names} dataKey="name" />
           <YAxis fontSize={10} className={style.chart__names} />
-          <Tooltip />
+          <Tooltip contentStyle={{ fontSize: windowSize > 500 ? '14px' : '12px' }} />
           <Legend fontSize={10} />
           <Line
             fontSize={10}

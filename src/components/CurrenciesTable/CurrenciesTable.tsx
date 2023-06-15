@@ -2,6 +2,7 @@ import style from './CurrenciesTable.module.scss';
 import React from 'react';
 import CurrencyRow from '../CurrencyRow/CurrencyRow';
 import { ResponseAssetsType } from '../../api/api';
+import { useResize } from '../../processes/hooks/useResize';
 
 type PropsType = {
   userCurrencies?: Array<{ id: string; value: number }>;
@@ -11,6 +12,8 @@ type PropsType = {
 };
 
 function CurrenciesTable({ type, page, currencies, userCurrencies, ...props }: PropsType) {
+  const windowSize = useResize();
+  const smallScreen = windowSize > 660;
   return (
     <div className={style.table__wrapper}>
       <table
@@ -23,8 +26,8 @@ function CurrenciesTable({ type, page, currencies, userCurrencies, ...props }: P
             <th>Price</th>
             {type === 'main' && <th>24h %</th>}
             {type === 'main' && <th>Market Cap</th>}
-            {type === 'main' && <th>Circulating Supply</th>}
-            {type === 'main' && <th>VWAP 24h</th>}
+            {type === 'main' && smallScreen && <th>Circulating Supply</th>}
+            {type === 'main' && smallScreen && <th>VWAP 24h</th>}
             {type === 'main' && <th>buy</th>}
             {type === 'portfolio' && <th>Delete</th>}
           </tr>
@@ -33,14 +36,20 @@ function CurrenciesTable({ type, page, currencies, userCurrencies, ...props }: P
           <tbody className={style.tbody}>
             {currencies &&
               currencies.map((c) => (
-                <CurrencyRow userCurrencies={userCurrencies} type={type} key={c.id} currency={c} />
+                <CurrencyRow
+                  smallScreen={smallScreen}
+                  userCurrencies={userCurrencies}
+                  type={type}
+                  key={c.id}
+                  currency={c}
+                />
               ))}
           </tbody>
         )}
         {!currencies && (
           <tbody className={style.tbody__loading}>
             {[...Array(6)].map((item, index) => (
-              <CurrencyRow key={index} type={type} currency={'loading'} />
+              <CurrencyRow key={index} smallScreen={smallScreen} type={type} currency={'loading'} />
             ))}
           </tbody>
         )}
